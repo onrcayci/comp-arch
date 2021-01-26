@@ -88,6 +88,6 @@ end process;
 
 -- decode the current state to create the output
 -- if the current state is S0, output is 0 otherwise output is 1
-output <=   '0' when state = S0 else '1';
+output <= '0' when (state = S0 or state = S1) else '1';
 
 end behavioral;
