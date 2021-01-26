@@ -38,13 +38,53 @@ END PROCESS;
  
 --TODO: Thoroughly test your FSM
 stim_process: PROCESS
-BEGIN    
-	REPORT "Example case, reading a meaningless character";
-	s_input <= "01011000";
+BEGIN
+	
+	REPORT "Test case 1, reading a line of comment";
+	s_input <= SLASH_CHARACTER;
 	WAIT FOR 1 * clk_period;
-	ASSERT (s_output = '0') REPORT "When reading a meaningless character, the output should be '0'" SEVERITY ERROR;
-	REPORT "_______________________";
-    
+	ASSERT (s_output = '0') REPORT "When reading the start of a comment, the output should be '0'" SEVERITY ERROR;
+	s_input <= STAR_CHARACTER;
+	WAIT FOR 1 * clk_period;
+	ASSERT (s_output = '0') REPORT "When reading the second part of a comment, the output should be '0'" SEVERITY ERROR;
+	s_input <= "01010100"; -- character t
+	WAIT FOR 1 * clk_period;
+	ASSERT (s_output = '1') REPORT "When inside a comment, the output should be '1'" SEVERITY ERROR;
+	s_input <= "01001000"; -- character h
+	WAIT FOR 1 * clk_period;
+	ASSERT (s_output = '1') REPORT "When inside a comment, the output should be '1'" SEVERITY ERROR;
+	s_input <= "01001001"; -- character i
+	WAIT FOR 1 * clk_period;
+	ASSERT (s_output = '1') REPORT "When inside a comment, the output should be '1'" SEVERITY ERROR;
+	s_input <= "01010011"; -- character s
+	WAIT FOR 1 * clk_period;
+	ASSERT (s_output = '1') REPORT "When inside a comment, the output should be '1'" SEVERITY ERROR;
+	s_input <= NEW_LINE_CHARACTER;
+	WAIT FOR 1 * clk_period;
+	ASSERT (s_output = '1') REPORT "When inside a comment, the output should be '1'" SEVERITY ERROR;
+	s_input <= "01010100"; -- character t
+	WAIT FOR 1 * clk_period;
+	ASSERT (s_output = '1') REPORT "When inside a comment, the output should be '1'" SEVERITY ERROR;
+	s_input <= "01001000"; -- character h
+	WAIT FOR 1 * clk_period;
+	ASSERT (s_output = '1') REPORT "When inside a comment, the output should be '1'" SEVERITY ERROR;
+	s_input <= "01001001"; -- character i
+	WAIT FOR 1 * clk_period;
+	ASSERT (s_output = '1') REPORT "When inside a comment, the output should be '1'" SEVERITY ERROR;
+	s_input <= "01010011"; -- character s
+	WAIT FOR 1 * clk_period;
+	ASSERT (s_output = '1') REPORT "When inside a comment, the output should be '1'" SEVERITY ERROR;
+	s_input <= STAR_CHARACTER;
+	WAIT FOR 1 * clk_period;
+	ASSERT (s_output = '1') REPORT "When leaving a comment, the output should be '1'" SEVERITY ERROR;
+	s_input <= SLASH_CHARACTER;
+	WAIT FOR 1 * clk_period;
+	ASSERT (s_output = '1') REPORT "When leaving a comment, the output should be '1'" SEVERITY ERROR;
+	s_input <= "01010101"; -- character u
+	WAIT FOR 1 * clk_period;
+   ASSERT (s_output = '0') REPORT "When outside a comment, the output should be '0'" SEVERITY ERROR;
+	REPORT "________.";
+	
 	WAIT;
 END PROCESS stim_process;
 END;

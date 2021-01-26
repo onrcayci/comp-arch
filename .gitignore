@@ -1,0 +1,12 @@
+# modelsim files
+mp1
+
+# compilation files
+*.qsf
+*.qws
+*.qdf
+*.bak
+*.mti
+*.mpf
+transcript
+*.wlf
