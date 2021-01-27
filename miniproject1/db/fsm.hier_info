@@ -1,0 +1,30 @@
+|comments_fsm
+clk => state~6.DATAIN
+reset => state~8.DATAIN
+input[0] => Equal0.IN7
+input[0] => Equal1.IN4
+input[0] => Equal2.IN5
+input[1] => Equal0.IN6
+input[1] => Equal1.IN7
+input[1] => Equal2.IN7
+input[2] => Equal0.IN5
+input[2] => Equal1.IN3
+input[2] => Equal2.IN4
+input[3] => Equal0.IN4
+input[3] => Equal1.IN6
+input[3] => Equal2.IN6
+input[4] => Equal0.IN2
+input[4] => Equal1.IN2
+input[4] => Equal2.IN3
+input[5] => Equal0.IN3
+input[5] => Equal1.IN5
+input[5] => Equal2.IN2
+input[6] => Equal0.IN1
+input[6] => Equal1.IN1
+input[6] => Equal2.IN1
+input[7] => Equal0.IN0
+input[7] => Equal1.IN0
+input[7] => Equal2.IN0
+output <= output.DB_MAX_OUTPUT_PORT_TYPE
+
+
