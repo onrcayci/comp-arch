@@ -19,7 +19,7 @@ constant STAR_CHARACTER : std_logic_vector(7 downto 0) := "00101010";
 constant NEW_LINE_CHARACTER : std_logic_vector(7 downto 0) := "00001010";
 
 -- Define the states
-TYPE State_type is (S0, S1, S2, S3, S4);
+TYPE State_type is (S0, S1, S2, S3, S4, S5, S6, S7);
 
 -- Create a signal that uses the different states
 signal state : State_type;
@@ -57,37 +57,60 @@ begin
             -- else if input is '*', then the next state is S3
             elsif input = STAR_CHARACTER then
                state <= S3;
+				
+				-- else go back to state S0
+				else
+					state <= S0;
             end if;
             
          -- if the current state is S2 and input is '\n', then the next state is S0
          when S2 =>
-            if input = NEW_LINE_CHARACTER then
-               state <= S0;
-            end if;
+				
+				-- transition to state to change the output to 1
+				state <= S6;
             
          -- if the current state is S3 and input is '*', then the next state is S4
          when S3 =>
-            if input = STAR_CHARACTER then
-               state <= S4;
-            end if;
+			
+				-- transition to state to change the output to 1
+				state <= S4;
             
          -- if the current state is S4
          when S4 =>
 
-            -- if input is '/', then the next state is S0
-            if input = SLASH_CHARACTER then
-               state <= S0;
-
-            -- else, the next state is S3
-            else
-               state <= S3;
+            -- if input is '*', then the next state is S5
+            if input = STAR_CHARACTER then
+               state <= S5;
             end if;
+			
+			-- if the current state is S5
+			when S5 =>
+			
+				-- if input is '/', then the next state is S7
+				if input = SLASH_CHARACTER then
+					state <= S7;
+				end if;
+			
+			-- if the current state is S6
+			when S6 =>
+			
+				-- if input is '\n', then the next state is S7
+				if input = NEW_LINE_CHARACTER then
+					state <= S7;
+				end if;
+			
+			-- if the current state is S7
+			when S7 =>
+				
+				-- transition to state to change the output to 0
+				state <= S0;
+			
       end case;
    end if;
 end process;
 
 -- decode the current state to create the output
 -- if the current state is S0 or S1, output is 0 otherwise output is 1
-output <= '0' when (state = S0 or state = S1) else '1';
+output <= '0' when (state = S0 or state = S1 or state = S2 or state = S3) else '1';
 
 end behavioral;

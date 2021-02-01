@@ -49,104 +49,131 @@ BEGIN
 	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '0') REPORT "When reading the second part of a comment, the output should be '0'" SEVERITY ERROR;
 	
-	s_input <= "01010100"; -- character t
+	-- c
+	s_input <= "01000011"; 
 	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '1') REPORT "When inside a comment, the output should be '1'" SEVERITY ERROR;
 	
-	s_input <= "01001000"; -- character h
+	-- o
+	s_input <= "01001111"; 
 	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '1') REPORT "When inside a comment, the output should be '1'" SEVERITY ERROR;
 	
-	s_input <= "01001001"; -- character i
+	-- m
+	s_input <= "01001101"; 
 	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '1') REPORT "When inside a comment, the output should be '1'" SEVERITY ERROR;
 	
-	s_input <= "01010011"; -- character s
+	-- m
+	s_input <= "01001101"; 
 	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '1') REPORT "When inside a comment, the output should be '1'" SEVERITY ERROR;
 	
-	s_input <= NEW_LINE_CHARACTER;
+	-- e
+	s_input <= "01000101";
 	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '1') REPORT "When inside a comment, the output should be '1'" SEVERITY ERROR;
 	
-	s_input <= "01010100"; -- character t
+	-- n
+	s_input <= "01001110"; 
 	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '1') REPORT "When inside a comment, the output should be '1'" SEVERITY ERROR;
 	
-	s_input <= "01001000"; -- character h
+	-- t
+	s_input <= "01010100"; 
 	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '1') REPORT "When inside a comment, the output should be '1'" SEVERITY ERROR;
 	
-	s_input <= "01001001"; -- character i
+	-- \n
+	s_input <= NEW_LINE_CHARACTER; 
 	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '1') REPORT "When inside a comment, the output should be '1'" SEVERITY ERROR;
 	
-	s_input <= "01010011"; -- character s
+	-- t
+	s_input <= "01010100"; 
 	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '1') REPORT "When inside a comment, the output should be '1'" SEVERITY ERROR;
 	
-	s_input <= STAR_CHARACTER;
+	-- h
+	s_input <= "01001000";
+	WAIT FOR 1 * clk_period;
+	ASSERT (s_output = '1') REPORT "When inside a comment, the output should be '1'" SEVERITY ERROR;
+	
+	-- i
+	s_input <= "01001001";
+	WAIT FOR 1 * clk_period;
+	ASSERT (s_output = '1') REPORT "When inside a comment, the output should be '1'" SEVERITY ERROR;
+	
+	-- s
+	s_input <= "01010011"; 
+	WAIT FOR 1 * clk_period;
+	ASSERT (s_output = '1') REPORT "When inside a comment, the output should be '1'" SEVERITY ERROR;
+
+	-- *
+	s_input <= STAR_CHARACTER; 
 	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '1') REPORT "When leaving a comment, the output should be '1'" SEVERITY ERROR;
 	
-	s_input <= SLASH_CHARACTER;
+	-- /
+	s_input <= SLASH_CHARACTER; 
 	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '1') REPORT "When leaving a comment, the output should be '1'" SEVERITY ERROR;
 	
-	s_input <= "01010101"; -- character u
+	-- s
+	s_input <= "01010011"; 
 	WAIT FOR 1 * clk_period;
    ASSERT (s_output = '0') REPORT "When outside a comment, the output should be '0'" SEVERITY ERROR;
-
+	
 	REPORT "Test case 2, reading two slashes";
 	s_input <= "00101111";
 	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '0') REPORT "After 1 slash output should be 0" SEVERITY ERROR;
 	
 	s_input <= "00101111";
-	WAIT FOR 1*clk_period;
-	ASSERT (s_output = '1') REPORT "After 2 slashes output should be 1" SEVERITY ERROR;
+	WAIT FOR 1 * clk_period;
+	ASSERT (s_output = '0') REPORT "After 2 slashes output should be 0" SEVERITY ERROR;
 	
 	--Q
 	s_input <= "01010001";
-	WAIT FOR 1*clk_period;
+	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '1') REPORT "During the comment the output should be 1" SEVERITY ERROR;
 	
 	--U
 	s_input <= "01010101";
-	WAIT FOR 1*clk_period;
+	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '1') REPORT "During the comment the output should be 1" SEVERITY ERROR;
 	
 	--A
 	s_input <= "01000001";
-	WAIT FOR 1*clk_period;
+	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '1') REPORT "During the comment the output should be 1" SEVERITY ERROR;
 	
 	--R
 	s_input <= "01010010";
-	WAIT FOR 1*clk_period;
+	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '1') REPORT "During the comment the output should be 1" SEVERITY ERROR;
 	
 	--T
 	s_input <= "01010100";
-	WAIT FOR 1*clk_period;
+	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '1') REPORT "During the comment the output should be 1" SEVERITY ERROR;
 	
 	--U
 	s_input <= "01010101";
-	WAIT FOR 1*clk_period;
+	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '1') REPORT "During the comment the output should be 1" SEVERITY ERROR;
 	
 	--S
 	s_input <= "01010011";
-	WAIT FOR 1*clk_period;
+	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '1') REPORT "During the comment the output should be 1" SEVERITY ERROR;
 	
 	s_input <= "00001010";
-	WAIT FOR 1*clk_period;
+	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '1') REPORT "Output 1 during \n" SEVERITY ERROR;
 	
 	s_input <= "00000000";
-	WAIT FOR 1*clk_period;
+	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '0') REPORT "Output 0 following \n" SEVERITY ERROR;
 	
 	WAIT;

@@ -1,6 +1,6 @@
 |comments_fsm
-clk => state~6.DATAIN
-reset => state~8.DATAIN
+clk => state~9.DATAIN
+reset => state~11.DATAIN
 input[0] => Equal0.IN7
 input[0] => Equal1.IN4
 input[0] => Equal2.IN5
