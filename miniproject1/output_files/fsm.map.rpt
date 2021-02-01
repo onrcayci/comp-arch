@@ -1,5 +1,5 @@
 Analysis & Elaboration report for fsm
-Mon Feb 01 11:50:30 2021
+Mon Feb 01 17:40:59 2021
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -37,7 +37,7 @@ https://fpgasoftware.intel.com/eula.
 +-----------------------------------------------------------------------------+
 ; Analysis & Elaboration Summary                                              ;
 +-------------------------------+---------------------------------------------+
-; Analysis & Elaboration Status ; Successful - Mon Feb 01 11:50:30 2021       ;
+; Analysis & Elaboration Status ; Successful - Mon Feb 01 17:40:59 2021       ;
 ; Quartus Prime Version         ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name                 ; fsm                                         ;
 ; Top-level Entity Name         ; comments_fsm                                ;
@@ -161,7 +161,7 @@ https://fpgasoftware.intel.com/eula.
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Elaboration
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Mon Feb 01 11:50:23 2021
+    Info: Processing started: Mon Feb 01 17:40:53 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off fsm -c fsm --analysis_and_elaboration
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 12 of the 12 processors detected
@@ -173,9 +173,9 @@ Info (12021): Found 2 design units, including 1 entities, in source file fsm.vhd
     Info (12023): Found entity 1: comments_fsm File: C:/Users/ocayci/git/comp-arch/miniproject1/fsm.vhd Line: 6
 Info (12127): Elaborating entity "comments_fsm" for the top level hierarchy
 Info: Quartus Prime Analysis & Elaboration was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4826 megabytes
-    Info: Processing ended: Mon Feb 01 11:50:30 2021
-    Info: Elapsed time: 00:00:07
-    Info: Total CPU time (on all processors): 00:00:13
+    Info: Peak virtual memory: 4834 megabytes
+    Info: Processing ended: Mon Feb 01 17:40:59 2021
+    Info: Elapsed time: 00:00:06
+    Info: Total CPU time (on all processors): 00:00:14
 
 

@@ -89,6 +89,8 @@ begin
 				-- if input is '/', then the next state is S7
 				if input = SLASH_CHARACTER then
 					state <= S7;
+				else
+					state <= S4;
 				end if;
 			
 			-- if the current state is S6
