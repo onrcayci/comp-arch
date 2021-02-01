@@ -125,11 +125,11 @@ BEGIN
    ASSERT (s_output = '0') REPORT "When outside a comment, the output should be '0'" SEVERITY ERROR;
 	
 	REPORT "Test case 2, reading two slashes";
-	s_input <= "00101111";
+	s_input <= SLASH_CHARACTER;
 	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '0') REPORT "After 1 slash output should be 0" SEVERITY ERROR;
 	
-	s_input <= "00101111";
+	s_input <= SLASH_CHARACTER;
 	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '0') REPORT "After 2 slashes output should be 0" SEVERITY ERROR;
 	
@@ -168,7 +168,36 @@ BEGIN
 	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '1') REPORT "During the comment the output should be 1" SEVERITY ERROR;
 	
-	s_input <= "00001010";
+	--Will now test whether */ will change the state during a single line comment
+	s_input <= STAR_CHARACTER;
+	WAIT FOR 1 * clk_period;
+	ASSERT (s_output = '1') REPORT "During the comment the output should be 1" SEVERITY ERROR;
+	
+	s_input <= SLASH_CHARACTER;
+	WAIT FOR 1 * clk_period;
+	ASSERT (s_output = '1') REPORT "During the comment the output should be 1" SEVERITY ERROR;
+	
+	--t
+	s_input <= "01110100";
+	WAIT FOR 1 * clk_period;
+	ASSERT (s_output = '1') REPORT "During the comment the output should be 1" SEVERITY ERROR;
+	
+	--e
+	s_input <= "01100101";
+	WAIT FOR 1 * clk_period;
+	ASSERT (s_output = '1') REPORT "During the comment the output should be 1" SEVERITY ERROR;
+	
+	--s
+	s_input <= "01110011";
+	WAIT FOR 1 * clk_period;
+	ASSERT (s_output = '1') REPORT "During the comment the output should be 1" SEVERITY ERROR;
+	
+	--t
+	s_input <= "01110100";
+	WAIT FOR 1 * clk_period;
+	ASSERT (s_output = '1') REPORT "During the comment the output should be 1" SEVERITY ERROR;
+	
+	s_input <= NEW_LINE_CHARACTER;
 	WAIT FOR 1 * clk_period;
 	ASSERT (s_output = '1') REPORT "Output 1 during \n" SEVERITY ERROR;
 	

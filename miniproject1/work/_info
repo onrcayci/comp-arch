@@ -1,0 +1,77 @@
+m255
+K3
+13
+cModel Technology
+Z0 d\\campus.mcgill.ca\emf\swe\ajohan5\Desktop\ECSE425\comp-arch\miniproject1
+Ecomments_fsm
+Z1 w1612209514
+Z2 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
+Z3 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
+Z4 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
+Z5 d\\campus.mcgill.ca\emf\swe\ajohan5\Desktop\ECSE425\comp-arch\miniproject1
+Z6 8fsm.vhd
+Z7 Ffsm.vhd
+l0
+L6
+VYI166mIC4czbZc5B1;Gmc2
+Z8 OV;C;10.1d;51
+32
+Z9 !s108 1612210738.580000
+Z10 !s90 -reportprogress|300|fsm.vhd|
+Z11 !s107 fsm.vhd|
+o-O0
+Z12 tExplicit 1
+!s100 07kLZ9KgEl;O4DXUc0OXB2
+!i10b 1
+Abehavioral
+R2
+R3
+R4
+DEx4 work 12 comments_fsm 0 22 YI166mIC4czbZc5B1;Gmc2
+l27
+L14
+VR^I4gz>RF?8oCc^5WWn_Q3
+R8
+32
+R9
+R10
+R11
+o-O0
+R12
+!s100 b4aF`i:B7Q6H9<A7[k89`2
+!i10b 1
+Efsm_tb
+Z13 w1612210362
+R3
+R4
+R5
+Z14 8//campus.mcgill.ca/emf/swe/ajohan5/Desktop/ECSE425/comp-arch/miniproject1/fsm_tb.vhd
+Z15 F//campus.mcgill.ca/emf/swe/ajohan5/Desktop/ECSE425/comp-arch/miniproject1/fsm_tb.vhd
+l0
+L4
+Vf1KLb^eiZg``TcC4z7Va21
+!s100 F;LgbFmbjUl>RhK7M7K=C2
+R8
+32
+!i10b 1
+Z16 !s108 1612210881.545000
+Z17 !s90 -reportprogress|300|-work|work|//campus.mcgill.ca/emf/swe/ajohan5/Desktop/ECSE425/comp-arch/miniproject1/fsm_tb.vhd|
+Z18 !s107 //campus.mcgill.ca/emf/swe/ajohan5/Desktop/ECSE425/comp-arch/miniproject1/fsm_tb.vhd|
+Z19 o-work work -O0
+R12
+Abehaviour
+R3
+R4
+DEx4 work 6 fsm_tb 0 22 f1KLb^eiZg``TcC4z7Va21
+l26
+L7
+V1[O<AlD4e7NKHfg5D>8z70
+Z20 !s100 @c[=0<QZ;ATzL9=jO=KKG2
+R8
+32
+!i10b 1
+R16
+R17
+R18
+R19
+R12
