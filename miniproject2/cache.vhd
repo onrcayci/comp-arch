@@ -71,6 +71,7 @@ begin
 	end process
 	
 	logic_process: process(s_read, s_write, m_waitrequest, state)
+		variable byte_count: INTEGER := 0;
 		variable address: std_logic_vector(14 downto 0);
 		variable index: INTEGER := 0;
 		variable offset: INTEGER;
@@ -78,7 +79,9 @@ begin
 		offset := to_integer(unsigned(s_addr(1 downto 0))); --why do we add one
 		index := to_integer(unsigned(s_addr(6 downto 2)));
 		
-		case state is 
+		case state is
+		
+			-- Initial state
 			when start =>
 				--Set high by default
 				s_waitrequest <= '1';
@@ -118,7 +121,8 @@ begin
 					next_state <= rd;
 					
 				end if;
-				
+			
+			-- Write operation
 			when w =>
 				--Case 1: Check if tags match, valid = 1, and dirty is true then its a miss
 				if cache_tags(index) = s_addr(31 downto 7) and cache_flags(index) = "11" then
@@ -131,9 +135,73 @@ begin
 					cache_tags(index) <= s_addr(31 downto 7);
 					s_waitrequest <= '0';
 					next_state <= start;
+				end if;
+			
+			-- Memory Read operation
 			when mem_read =>
+				
+				-- Check for memory wait request to read
+				if m_waitrequest = '1' then
+					
+					-- We are using only the lower 15 bits for the address space
+					m_addr <= to_integer(unsigned(s_addr(14 downto 0))) + byte_count;
+					m_read <= '1';
+					m_write <= '0';
+					
+					-- Since main memory is slower than cache, wait for the read to be processed
+					next_state <= mem_wait;
+				else
+					next_state <= mem_read;
+				end if;
+				
+			-- Write to the main memory
 			when mem_write =>
+				
+				-- Remove the old data from the main memory
+				if byte_count < 4 and m_waitrequest = '1' and next_state /= mem_read then
+					address := cache_tags(index)(7 downto 0) & s_addr(6 downto 0);
+					m_addr <= to_integer(unsigned(address)) + byte_count;
+					m_write <= '1';
+					m_read <= '0';
+					
+					-- Write operation
+					m_writedata <= cache_data(index)(offset)((byte_count * 8) + 7 downto (byte_count * 8));
+					word_count := word_count + 1;
+					next_state <= mem_write;
+				
+				-- if we read the limit
+				elsif byte_count = 4 then
+					byte_count := 0;
+					next_state <= mem_read;
+				else
+					m_write <= '0';
+					next_state <= mem_write;
+				end if;
+			
+			-- Waiting to access the main memory
 			when mem_wait =>
+				if byte_count < 3 and m_waitrequest = '0' then
+					cache_data(index)(offset)((byte_count * 8) + 7 downto (byte_count * 8)) <= m_readdata;
+					byte_count := byte_count + 1;
+					m_read <= '0';
+					next_state <= mem_read;
+				elsif byte_count = 3 and m_waitrequest = '0' then
+					cache_data(index)(offset)((byte_count * 8) + 7 downto (byte_count * 8)) <= m_readdata;
+					byte_count := byte_count + 1;
+					m_read <= '0';
+					next_state <= mem_wait;
+				elsif byte_count = 4 then
+					s_readdata <= cache_data(index)(offset);
+					cache_tags(index) <= s_addr(31 downto 7);
+					cache_flags(index) <= "01";
+					m_read <= '0';
+					m_write <= '0';
+					s_waitrequest <= '0';
+					byte_count := 0;
+					next_state <= initial;
+				else
+					next_state <= mem_wait;
+				end if;
 			when wb =>
 		end case
 	end process
