@@ -166,7 +166,7 @@ begin
 					
 					-- Write operation
 					m_writedata <= cache_data(index)(offset)((byte_count * 8) + 7 downto (byte_count * 8));
-					word_count := word_count + 1;
+					byte_count := byte_count + 1;
 					next_state <= mem_write;
 				
 				-- if we read the limit
@@ -202,7 +202,33 @@ begin
 				else
 					next_state <= mem_wait;
 				end if;
+				
+			--writeback from cache to mem
 			when wb =>
+				--First write the contents of cache to mem
+				if byte_count < 4 and m_waitrequest = '1' then
+					address := cache_tags(index)(7 downto 0) & s_addr(6 downto 0);
+					m_addr <= to_integer(unsigned(address)) + byte_count;
+					m_write <= '1';
+					m_read <= '0';
+					m_writedata <= cache_data(index)(offset)((byte_count * 8) + 7 downto (byte_count * 8));
+					byte_count := byte_count + 1;
+					next_state <= wb;
+					
+				--Write to the cache now
+				elsif c = 4 then
+					cache_data(index)(offset) <= s_writedata;
+					cache_tags(index) <= s_addr(31 downto 7);
+					cache_flags(index) <= '11';
+					byte_count := 0;
+					
+					s_waitrequest <= '0';
+					next_state <= initial;
+					
+				else
+					m_write <= '0';
+					next_state <= wb;
+				end if;
 		end case
 	end process
 		
