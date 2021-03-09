@@ -124,7 +124,7 @@ begin
 			-- Write operation
 			when w =>
 				--Case 1: Check if tags match, valid = 1, and dirty is true then its a miss
-				if cache_tags(index) = s_addr(14 downto 7) and cache_flags(index) = "11" then
+				if cache_tags(index) /= s_addr(14 downto 7) and cache_flags(index) = "11" then
 					next_state <= wb;
 					
 				--Case 2: Normal write
