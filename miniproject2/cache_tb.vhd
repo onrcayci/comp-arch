@@ -145,125 +145,125 @@ begin
 
 	wait for clk_period;
 
---	-- 4.  Read  -  Clean,  Miss,  Invalid
---	s_addr <= "11111111101111011111111110111111";                        
---	s_read <= '1';                                                       
---	s_write <= '0';                                                      
---	wait until rising_edge(s_waitrequest);                               
---	s_read <= '0';                                                       
---	s_write <= '0'; 
---   
---	wait for clk_period;
---
---	-- 5.  Read  -  Dirty,  Hit,   Valid
---	s_addr <= "11111111111111111111111111111100";                        
---	s_write <= '1';                                                      
---	s_writedata <= x"000F000A";                                          
---	wait until rising_edge(s_waitrequest);                               
---	s_read <= '1';                                                       
---	s_write <= '0';                                                      
---	wait until rising_edge(s_waitrequest);                               
---	assert s_readdata = x"000F000A" report "Test 5 Not Passed!" severity error;
---	s_read <= '0';                                                       
---	s_write <= '0'; 
---
---	wait for clk_period;
---
---
---	-- 7.  Read  -  Dirty,  Miss,  Valid
---	WAIT FOR clk_period;
---	s_addr <= "11111110000000000000000000000000";
---	s_write <= '1';
---	s_writedata <= x"04030201";
---	wait until rising_edge(s_waitrequest);
---	s_addr <= "00000000000000000000100000000000";
---	s_write <= '0';
---	s_read <= '1';
---	wait until rising_edge(s_waitrequest);
---	assert s_readdata = x"03020100" report "Test 7 Not Passed!" severity error;
---	s_read <= '0';
---	s_write <= '0';
---
---	wait for clk_period;
---
---	-- 9.  Write -  Clean,  Hit,   Valid
---	s_addr <= "10000000000000000000000000000000";	
---	s_read <= '1';                                                       
---	s_write <= '0';                                                      
---	wait until rising_edge(s_waitrequest);                               
---	s_write <= '1';
---	s_read <= '0';
---	s_writedata <= x"0000000B";
---	wait until rising_edge(s_waitrequest);                               
---	s_write <= '0';
---	s_read <= '0';
---
---	wait for clk_period;
---
---	-- 11. Write -  Clean,  Miss,  Valid
---	s_addr <= "11100000000000000000000000000000";	
---	s_read <= '1';                                                       
---	s_write <= '0';                                                      
---	wait until rising_edge(s_waitrequest);                               
---	s_addr <= "11100000000000000000001000000000";	
---	s_write <= '1';
---	s_read <= '0';
---	s_writedata <= x"0000000D";
---	wait until rising_edge(s_waitrequest);                               
---	s_write <= '0';
---	s_read <= '0';
---
---	wait for clk_period;
---
---	-- 12. Write -  Clean,  Miss,  Invalid
---	s_addr <= "11111111111111111111111111111100";                        
---	s_write <= '1';                                                      
---	s_writedata <= x"000F000A";                                          
---	wait until rising_edge(s_waitrequest);                               
---	s_read <= '1';                                                       
---	s_write <= '0';                                                      
---	wait until rising_edge(s_waitrequest);                               
---	assert s_readdata = x"000F000A" report "Test 12 Not Passed!" severity error;
---	s_read <= '0';                                                       
---	s_write <= '0'; 
---
---	wait for clk_period;
---
---	-- 13. Write -  Dirty,  Hit,   Valid
---	s_addr <= "11000000000000000000000000000000";	
---	s_write <= '1';
---	s_read <= '0';
---	s_writedata <= x"0000000B";
---	wait until rising_edge(s_waitrequest);                               
---	s_addr <= "11000000000000000000000000000000";	
---	s_write <='0';
---	wait for clk_period;
---	s_write <= '1';
---	s_read <= '0';
---	s_writedata <= x"0000000C";
---	wait until rising_edge(s_waitrequest);                               
---	s_write <= '0';
---	s_read <= '0';
---
---	wait for clk_period;
---
---	-- 15. Write -  Dirty,  Miss,  Valid
---	s_addr <= "11111100000000000000000000000000";
---	s_write <= '1';
---	s_writedata <= x"04030201";
---	wait until rising_edge(s_waitrequest);
---	s_addr <= "00000000000000000000000100000000";
---	s_write <= '1';
---	s_writedata <= x"000000BA"; 	
---	wait until rising_edge(s_waitrequest);
---	s_read <= '1';
---	s_write <= '0';
---	wait until rising_edge(s_waitrequest);
---	assert s_readdata = x"000000BA" report "Test 15 Not Passed!" severity error;
---	s_read <= '0';
---	s_write <= '0';
---
---	wait for clk_period;
+	-- 4.  Read  -  Clean,  Miss,  Invalid
+	s_addr <= "11111111101111011111111110111111";                        
+	s_read <= '1';                                                       
+	s_write <= '0';                                                      
+	wait until rising_edge(s_waitrequest);                               
+	s_read <= '0';                                                       
+	s_write <= '0'; 
+   
+	wait for clk_period;
+
+	-- 5.  Read  -  Dirty,  Hit,   Valid
+	s_addr <= "11111111111111111111111111111100";                        
+	s_write <= '1';                                                      
+	s_writedata <= x"000F000A";                                          
+	wait until rising_edge(s_waitrequest);                               
+	s_read <= '1';                                                       
+	s_write <= '0';                                                      
+	wait until rising_edge(s_waitrequest);                               
+	assert s_readdata = x"000F000A" report "Test 5 Not Passed!" severity error;
+	s_read <= '0';                                                       
+	s_write <= '0'; 
+
+	wait for clk_period;
+
+
+	-- 7.  Read  -  Dirty,  Miss,  Valid
+	WAIT FOR clk_period;
+	s_addr <= "11111110000000000000000000000000";
+	s_write <= '1';
+	s_writedata <= x"04030201";
+	wait until rising_edge(s_waitrequest);
+	s_addr <= "00000000000000000000100000000000";
+	s_write <= '0';
+	s_read <= '1';
+	wait until rising_edge(s_waitrequest);
+	assert s_readdata = x"03020100" report "Test 7 Not Passed!" severity error;
+	s_read <= '0';
+	s_write <= '0';
+
+	wait for clk_period;
+
+	-- 9.  Write -  Clean,  Hit,   Valid
+	s_addr <= "10000000000000000000000000000000";	
+	s_read <= '1';                                                       
+	s_write <= '0';                                                      
+	wait until rising_edge(s_waitrequest);                               
+	s_write <= '1';
+	s_read <= '0';
+	s_writedata <= x"0000000B";
+	wait until rising_edge(s_waitrequest);                               
+	s_write <= '0';
+	s_read <= '0';
+
+	wait for clk_period;
+
+	-- 11. Write -  Clean,  Miss,  Valid
+	s_addr <= "11100000000000000000000000000000";	
+	s_read <= '1';                                                       
+	s_write <= '0';                                                      
+	wait until rising_edge(s_waitrequest);                               
+	s_addr <= "11100000000000000000001000000000";	
+	s_write <= '1';
+	s_read <= '0';
+	s_writedata <= x"0000000D";
+	wait until rising_edge(s_waitrequest);                               
+	s_write <= '0';
+	s_read <= '0';
+
+	wait for clk_period;
+
+	-- 12. Write -  Clean,  Miss,  Invalid
+	s_addr <= "11111111111111111111111111111100";                        
+	s_write <= '1';                                                      
+	s_writedata <= x"000F000A";                                          
+	wait until rising_edge(s_waitrequest);                               
+	s_read <= '1';                                                       
+	s_write <= '0';                                                      
+	wait until rising_edge(s_waitrequest);                               
+	assert s_readdata = x"000F000A" report "Test 12 Not Passed!" severity error;
+	s_read <= '0';                                                       
+	s_write <= '0'; 
+
+	wait for clk_period;
+
+	-- 13. Write -  Dirty,  Hit,   Valid
+	s_addr <= "11000000000000000000000000000000";	
+	s_write <= '1';
+	s_read <= '0';
+	s_writedata <= x"0000000B";
+	wait until rising_edge(s_waitrequest);                               
+	s_addr <= "11000000000000000000000000000000";	
+	s_write <='0';
+	wait for clk_period;
+	s_write <= '1';
+	s_read <= '0';
+	s_writedata <= x"0000000C";
+	wait until rising_edge(s_waitrequest);                               
+	s_write <= '0';
+	s_read <= '0';
+
+	wait for clk_period;
+
+	-- 15. Write -  Dirty,  Miss,  Valid
+	s_addr <= "11111100000000000000000000000000";
+	s_write <= '1';
+	s_writedata <= x"04030201";
+	wait until rising_edge(s_waitrequest);
+	s_addr <= "00000000000000000000000100000000";
+	s_write <= '1';
+	s_writedata <= x"000000BA"; 	
+	wait until rising_edge(s_waitrequest);
+	s_read <= '1';
+	s_write <= '0';
+	wait until rising_edge(s_waitrequest);
+	assert s_readdata = x"000000BA" report "Test 15 Not Passed!" severity error;
+	s_read <= '0';
+	s_write <= '0';
+
+	wait for clk_period;
 
 	wait;
 	

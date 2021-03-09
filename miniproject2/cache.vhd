@@ -37,10 +37,10 @@ signal next_state: states;
 
 --Block Structure
 --128 bits of data
---8 bit tag --> main mem only has 2^15 bytes
+--8 bit tag --> main mem only has 2^15 bytes; 2^5 blocks and each block has 2^2 words; therefore 15 - (5 + 2) = 8 bits for tag
 --1 bit valid
 --1 bit dirty
---143 bits total
+--138 bits total
 
 
 -- 32-block cache
@@ -68,13 +68,17 @@ begin
 	end process;
 	
 	logic_process: process(s_read, s_write, m_waitrequest, state)
+		-- byte count for main memory, in order to support word aligned
 		variable byte_count: INTEGER := 0;
+		-- word offset count in order to load or write a whole cache block
 		variable offset_count: INTEGER := 0;
 		variable address: std_logic_vector(14 downto 0);
+		-- block index
 		variable index: INTEGER := 0;
+		-- block offset, which corresponds to the word in a block
 		variable offset: INTEGER;
 	begin
-		offset := to_integer(unsigned(s_addr(1 downto 0))); --why do we add one
+		offset := to_integer(unsigned(s_addr(1 downto 0)));
 		index := to_integer(unsigned(s_addr(6 downto 2)));
 		
 		case state is
@@ -115,9 +119,6 @@ begin
 				elsif cache_flags(index) = "00" or cache_flags(index) = "UU" then
 					next_state <= mem_read;
 					
-				else
-					next_state <= r;
-					
 				end if;
 			
 			-- Write operation
@@ -156,7 +157,7 @@ begin
 			when mem_write =>
 				
 				-- Remove the old data from the main memory
-				if byte_count < 4 and m_waitrequest = '1' and next_state /= mem_read then
+				if byte_count < 3 and offset_count < 4 and m_waitrequest = '1' and next_state /= mem_read then
 					address := cache_tags(index) & s_addr(6 downto 0);
 					m_addr <= to_integer(unsigned(address)) + byte_count + (4 * offset_count);
 					m_write <= '1';
@@ -166,15 +167,23 @@ begin
 					m_writedata <= cache_data(index)(offset + offset_count)((byte_count * 8) + 7 downto (byte_count * 8));
 					byte_count := byte_count + 1;
 					next_state <= mem_write;
-				
-				-- if we read the limit
-				elsif byte_count = 4 then
+				elsif byte_count = 3 and m_waitrequest = '1' and next_state /= mem_read then
+					address := cache_tags(index) & s_addr(6 downto 0);
+					m_addr <= to_integer(unsigned(address)) + byte_count + (4 * offset_count);
+					m_write <= '1';
+					m_read <= '0';
+					
+					-- Write operation
+					m_writedata <= cache_data(index)(offset + offset_count)((byte_count * 8) + 7 downto (byte_count * 8));
 					byte_count := 0;
 					offset_count := offset_count + 1;
-				elsif offset_count = 4 then
-					byte_count := 0;
-					offset_count := 0;
-					next_state <= mem_read;
+					if offset_count < 4 then
+						next_state <= mem_write;
+					else
+						byte_count := 0;
+						offset_count := 0;
+						next_state <= mem_read;
+					end if;
 				else
 					m_write <= '0';
 					next_state <= mem_write;
@@ -214,24 +223,34 @@ begin
 			--writeback from cache to mem
 			when wb =>
 				--First write the contents of cache to mem
-				if byte_count < 4 and m_waitrequest = '1' then
+				if byte_count < 3 and offset_count < 4 and m_waitrequest = '1' then
 					address := cache_tags(index) & s_addr(6 downto 0);
-					m_addr <= to_integer(unsigned(address)) + byte_count;
+					m_addr <= to_integer(unsigned(address)) + byte_count + (4 * offset_count);
 					m_write <= '1';
 					m_read <= '0';
-					m_writedata <= cache_data(index)(offset)((byte_count * 8) + 7 downto (byte_count * 8));
+					m_writedata <= cache_data(index)(offset + offset_count)((byte_count * 8) + 7 downto (byte_count * 8));
 					byte_count := byte_count + 1;
 					next_state <= wb;
 					
-				--Write to the cache now
-				elsif byte_count = 4 then
+				elsif byte_count = 3 and m_waitrequest = '1' then
+					address := cache_tags(index) & s_addr(6 downto 0);
+					m_addr <= to_integer(unsigned(address)) + byte_count + (4 * offset_count);
+					m_write <= '1';
+					m_read <= '0';
+					m_writedata <= cache_data(index)(offset + offset_count)((byte_count * 8) + 7 downto (byte_count * 8));
+					byte_count := 0;
+					offset_count := offset_count + 1;
+					if offset_count < 4 then
+						next_state <= wb;
+					else
 					cache_data(index)(offset) <= s_writedata;
 					cache_tags(index) <= s_addr(14 downto 7);
 					cache_flags(index) <= "11";
 					byte_count := 0;
-					
+					offset_count := 0;
 					s_waitrequest <= '0';
 					next_state <= start;
+					end if;
 				else
 					m_write <= '0';
 					next_state <= wb;
