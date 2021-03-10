@@ -1,5 +1,5 @@
 proc AddWaves {} {
-	add wave -position end sim:/cache_tb/clock
+	add wave -position end sim:/cache_tb/clk
 	add wave -position end sim:/cache_tb/reset
 	add wave -position end sim:/cache_tb/s_addr
 	add wave -position end sim:/cache_tb/s_read
@@ -23,7 +23,7 @@ vcom cache_tb.vhd
 
 vsim cache_tb
 
-force -deposit clk 0 0 ns, 2 1 ns -repeat 2 ns
+force -deposit clk 0 0 ns, 1 1 ns -repeat 2 ns
 
 AddWaves
 
