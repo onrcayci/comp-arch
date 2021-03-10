@@ -123,7 +123,7 @@ begin
 			
 			-- Write operation
 			when w =>
-				--Case 1: Check if tags match, valid = 1, and dirty is true then its a miss
+				--Case 1: Check if tags don't match, valid = 1, and dirty is true then its a miss
 				if cache_tags(index) /= s_addr(14 downto 7) and cache_flags(index) = "11" then
 					next_state <= wb;
 					
@@ -157,7 +157,7 @@ begin
 			when mem_write =>
 				
 				-- Remove the old data from the main memory
-				if byte_count < 3 and offset_count < 4 and m_waitrequest = '1' and next_state /= mem_read then
+				if byte_count < 3 and offset_count < 4 and m_waitrequest = '1' then
 					address := cache_tags(index) & s_addr(6 downto 0);
 					m_addr <= to_integer(unsigned(address)) + byte_count + (4 * offset_count);
 					m_write <= '1';
@@ -167,7 +167,7 @@ begin
 					m_writedata <= cache_data(index)(offset + offset_count)((byte_count * 8) + 7 downto (byte_count * 8));
 					byte_count := byte_count + 1;
 					next_state <= mem_write;
-				elsif byte_count = 3 and m_waitrequest = '1' and next_state /= mem_read then
+				elsif byte_count = 3 and m_waitrequest = '1' then
 					address := cache_tags(index) & s_addr(6 downto 0);
 					m_addr <= to_integer(unsigned(address)) + byte_count + (4 * offset_count);
 					m_write <= '1';
@@ -204,18 +204,16 @@ begin
 					if offset_count < 4 then
 						next_state <= mem_read;
 					else
-						next_state <= mem_wait;
+						s_readdata <= cache_data(index)(offset);
+						cache_tags(index) <= s_addr(14 downto 7);
+						cache_flags(index) <= "01";
+						m_read <= '0';
+						m_write <= '0';
+						s_waitrequest <= '0';
+						byte_count := 0;
+						offset_count := 0;
+						next_state <= start;
 					end if;
-				elsif offset_count = 4 and m_waitrequest ='0' then
-					s_readdata <= cache_data(index)(offset);
-					cache_tags(index) <= s_addr(14 downto 7);
-					cache_flags(index) <= "01";
-					m_read <= '0';
-					m_write <= '0';
-					s_waitrequest <= '0';
-					byte_count := 0;
-					offset_count := 0;
-					next_state <= start;
 				else
 					next_state <= mem_wait;
 				end if;
