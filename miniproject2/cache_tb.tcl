@@ -23,7 +23,7 @@ vcom cache_tb.vhd
 
 vsim cache_tb
 
-force -deposit clock 0 0 ns, 2 1ns -repeat 2ns
+force -deposit clk 0 0 ns, 2 1 ns -repeat 2 ns
 
 AddWaves
 
