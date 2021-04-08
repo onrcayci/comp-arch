@@ -14,33 +14,32 @@ Z0 w1615339323
 Z1 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
 Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z3 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
-!i122 156
+!i122 159
 Z4 dC:/Users/ocayci/git/comp-arch/miniproject2
-Z5 8C:/Users/ocayci/git/comp-arch/miniproject2/cache.vhd
-Z6 FC:/Users/ocayci/git/comp-arch/miniproject2/cache.vhd
+Z5 8cache.vhd
+Z6 Fcache.vhd
 l0
 L5 1
-VzWe85hT9^0lP:82a<PAH01
+VeS6b:aGLUCLVdXcGbb^Zk3
 !s100 2DM=3>mdWRofJV=]aGJT10
 Z7 OV;C;2020.1;71
 32
-Z8 !s110 1615342344
+Z8 !s110 1615342575
 !i10b 1
-Z9 !s108 1615342344.000000
-Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/ocayci/git/comp-arch/miniproject2/cache.vhd|
-Z11 !s107 C:/Users/ocayci/git/comp-arch/miniproject2/cache.vhd|
+Z9 !s108 1615342575.000000
+Z10 !s90 -reportprogress|300|cache.vhd|
+Z11 !s107 cache.vhd|
 !i113 1
-Z12 o-work work -2002 -explicit
-Z13 tExplicit 1 CvgOpt 0
+Z12 tExplicit 1 CvgOpt 0
 Aarch
 R1
 R2
 R3
-DEx4 work 5 cache 0 22 zWe85hT9^0lP:82a<PAH01
-!i122 156
+DEx4 work 5 cache 0 22 eS6b:aGLUCLVdXcGbb^Zk3
+!i122 159
 l58
 L30 231
-Vl9mK0mgEdSWDk^?:b2L3E2
+V9ld9:zG4`cnO7gekRY]dk1
 !s100 SjzER7:AnNZ_eKL8GfLI10
 R7
 32
@@ -51,90 +50,87 @@ R10
 R11
 !i113 1
 R12
-R13
 Ecache_tb
-Z14 w1615342341
+Z13 w1615342478
 R1
 R2
 R3
-!i122 157
+!i122 160
 R4
-Z15 8C:/Users/ocayci/git/comp-arch/miniproject2/cache_tb.vhd
-Z16 FC:/Users/ocayci/git/comp-arch/miniproject2/cache_tb.vhd
+Z14 8cache_tb.vhd
+Z15 Fcache_tb.vhd
 l0
 L5 1
-V7E4^229J[_6oaW@8H^^z00
+Vi]X^50aNb6mMEU7GdLLX93
 !s100 N8hTJD?ado=UI;TQE4:Ql3
 R7
 32
-Z17 !s110 1615342345
+R8
 !i10b 1
 R9
-Z18 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/ocayci/git/comp-arch/miniproject2/cache_tb.vhd|
-Z19 !s107 C:/Users/ocayci/git/comp-arch/miniproject2/cache_tb.vhd|
+Z16 !s90 -reportprogress|300|cache_tb.vhd|
+!s107 cache_tb.vhd|
 !i113 1
 R12
-R13
 Abehavior
 R1
 R2
 R3
-DEx4 work 8 cache_tb 0 22 7E4^229J[_6oaW@8H^^z00
-!i122 157
+DEx4 work 8 cache_tb 0 22 i]X^50aNb6mMEU7GdLLX93
+!i122 160
 l71
-L8 265
-V4>EN^n4@8G4Z6OkDNZ9nE0
-!s100 >^27T4AYNO8Gd>oOd5^Pg0
+Z17 L8 265
+Vmlk8;Rb2@hnV<n_E56D:f3
+!s100 42oC4Plm7C>:=>UOif4;?1
 R7
 32
-R17
+R8
 !i10b 1
 R9
-R18
-R19
+R16
+Z18 !s107 cache_tb.vhd|
 !i113 1
 R12
-R13
 Ememory
-Z20 w1614268390
+Z19 w1614268390
 R1
 R2
 R3
 !i122 158
 R4
-Z21 8C:/Users/ocayci/git/comp-arch/miniproject2/memory.vhd
-Z22 FC:/Users/ocayci/git/comp-arch/miniproject2/memory.vhd
+Z20 8C:/Users/ocayci/git/comp-arch/miniproject2/memory.vhd
+Z21 FC:/Users/ocayci/git/comp-arch/miniproject2/memory.vhd
 l0
 L6 1
 V3LP4`=ezmehUVN:f8HSal1
 !s100 TL`MNK5NTn0=f?i`Ph2JS3
 R7
 32
-R17
+Z22 !s110 1615342345
 !i10b 1
 Z23 !s108 1615342345.000000
 Z24 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/ocayci/git/comp-arch/miniproject2/memory.vhd|
 Z25 !s107 C:/Users/ocayci/git/comp-arch/miniproject2/memory.vhd|
 !i113 1
+Z26 o-work work -2002 -explicit
 R12
-R13
 Artl
 R1
 R2
 R3
-Z26 DEx4 work 6 memory 0 22 3LP4`=ezmehUVN:f8HSal1
+DEx4 work 6 memory 0 22 3LP4`=ezmehUVN:f8HSal1
 !i122 158
 l29
-Z27 L23 48
-Z28 VRGS>@C^TliVBWJiQY=8il2
-Z29 !s100 Fl5=Y6J][VGa6l_6YBKG33
+L23 48
+VRGS>@C^TliVBWJiQY=8il2
+!s100 Fl5=Y6J][VGa6l_6YBKG33
 R7
 32
-R17
+R22
 !i10b 1
 R23
 R24
 R25
 !i113 1
+R26
 R12
-R13
